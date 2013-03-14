@@ -1,6 +1,4 @@
 <?php
-require './oauth.php';
-  
 class Action{
 	function Event_Watch($tmhOAuth,$data)
 	{
