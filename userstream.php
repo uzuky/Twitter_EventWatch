@@ -1,7 +1,7 @@
 <?php
-  require './lib/tmhOAuth/tmhOAuth.php';
-  require './oauth.php';
-  require './action.php';
+  require dirname(__FILE__).'/'.'./lib/tmhOAuth/tmhOAuth.php';
+  require dirname(__FILE__).'/'.'./oauth.php';
+  require dirname(__FILE__).'/'.'./action.php';
   
   $tmhOAuth = new tmhOAuth(
 	  array(
