@@ -36,3 +36,5 @@ $ php userstream.php
 ###動作確認環境
 OS:Ubuntu 12.04  
 PHP:5.4.6
+
+※php_curl入れたら、Windows(PHP5.3.24)でもとりあえず動きました。
