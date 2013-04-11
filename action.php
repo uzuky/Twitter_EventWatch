@@ -34,7 +34,30 @@ class Action{
 		));
 	}
 	
-	public function Tweet_Watch($tmhOAuth,$data){
+	function Lacolacolaco($tmhOAuth,$data)
+	{
+		$text = $data->{"text"};
+		$id = $data->{"id_str"};
+		$target_text = 'らこらこらこ';
+		$post_text = 'らこらこらこ〜ｗ';
+		if ((strpos($text, $target_text)) !== false) {
+			$res = self::UpdateStatus($tmhOAuth,$post_text);
+			self::Create_Favorite($tmhOAuth,$id);
+			while($res == 403){
+				$post_text .= 'w';
+				$res = self::UpdateStatus($tmhOAuth,$post_text);
+			}
+		}
+	}
+	
+	function Create_Favorite($tmhOAuth,$id)
+	{
+		$tmhOAuth->request('POST', $tmhOAuth->url('1.1/favorites/create'), array(
+		'id' => $id
+		));
+	}
+	
+	function Tweet_Watch($tmhOAuth,$data){
 		@$screen_name = $data->{"user"}->{"screen_name"};
 		@$text = $data->{"text"};
 		print "@$screen_name - $text \n";

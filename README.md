@@ -1,9 +1,13 @@
-###なにこれ
+﻿###なにこれ
 @enkunkun氏の
 >[![test](https://si0.twimg.com/profile_images/3363502251/fb0a154766e0a66b2e9898f307b02639_normal.png)](https://twitter.com/enkunkun/status/312291081276489728?lang=ja)
 >@taiki45 |◞‸◟ ) あんふぁぼされた…
 
-みたいなものをPHPで実装した。
+みたいなものと
+
+mikutterプラグインの「らこらこらこ～ｗ」するやつを
+
+PHPで実装した。
 
 ###Install
 ```

@@ -22,9 +22,16 @@
   	global $tmhOAuth;
 	  @$res = json_decode($data);
 	  
-	  //各アクションを実行
+	  //各アクションを実行 必要ないものはコメントアウトしましょ
+	  
+	  /** えんくんのアレ **/
 	  Action::Event_Watch($tmhOAuth,$res);
+	  
+	  /** スクリーンネームとつぶやきを見る**/
 	  Action::Tweet_Watch($tmhOAuth,$res);
+	  
+	  /** らこらこらこ～ｗ **/
+	  Action::Lacolacolaco($tmhOAuth,$res);
   }
   
   /***
