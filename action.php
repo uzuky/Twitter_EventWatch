@@ -1,6 +1,6 @@
 <?php
 class Action{
-	function Event_Watch($tmhOAuth,$data)
+	public function Event_Watch($tmhOAuth,$data)
 	{
 		@$event = $data->event;
 		@$screen_name = $data->{"source"}->{"screen_name"};
@@ -27,37 +27,44 @@ class Action{
 		}	
 	}
 	
-	function UpdateStatus($tmhOAuth,$text,$InReplyTo)
+	public function UpdateStatus($tmhOAuth,$text,$InReplyTo)
 	{
-		$tmhOAuth->request('POST', $tmhOAuth->url('1/statuses/update'), array(
+		return $tmhOAuth->request('POST', $tmhOAuth->url('1.1/statuses/update'), array(
 		'status' => $text
 		));
 	}
 	
-	function Lacolacolaco($tmhOAuth,$data)
+	public function Lacolacolaco($tmhOAuth,$data,$your_screen_name)
 	{
 		$text = $data->{"text"};
 		$id = $data->{"id_str"};
+		//$source_user_id = $data->{"user"}->{"id_str"};
+		$source_screen_name = $data->{"user"}->{"screen_name"};
 		$target_text = 'らこらこらこ';
 		$post_text = 'らこらこらこ〜ｗ';
-		if ((strpos($text, $target_text)) !== false) {
-			$res = self::UpdateStatus($tmhOAuth,$post_text);
-			self::Create_Favorite($tmhOAuth,$id);
-			while($res == 403){
-				$post_text .= 'w';
+		if( $source_screen_name !== $your_screen_name ){
+			if ((strpos($text, $target_text)) !== false) {
 				$res = self::UpdateStatus($tmhOAuth,$post_text);
+				self::Create_Favorite($tmhOAuth,$id);
+				while($res == 403){
+					// 投稿失敗時、ｗが4以下だったららこらこする
+					if( (substr_count($post_text, 'ｗ')) < 4){
+						$post_text .= 'ｗ';
+						$res = self::UpdateStatus($tmhOAuth,$post_text);
+					}
+				}
 			}
 		}
 	}
 	
-	function Create_Favorite($tmhOAuth,$id)
+	public function Create_Favorite($tmhOAuth,$id)
 	{
 		$tmhOAuth->request('POST', $tmhOAuth->url('1.1/favorites/create'), array(
 		'id' => $id
 		));
 	}
 	
-	function Tweet_Watch($tmhOAuth,$data){
+	public function Tweet_Watch($tmhOAuth,$data){
 		@$screen_name = $data->{"user"}->{"screen_name"};
 		@$text = $data->{"text"};
 		print "@$screen_name - $text \n";

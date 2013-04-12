@@ -14,7 +14,7 @@
   
   
   //Tweet受信にfilter_callback関数を呼び出す
-  $method = "https://userstream.twitter.com/2/user.json";
+  $method = "https://userstream.twitter.com/1.1/user.json";
   $params = array();
   $tmhOAuth->streaming_request('POST', $method, $params, 'filter_callback', true);
   
@@ -31,7 +31,7 @@
 	  Action::Tweet_Watch($tmhOAuth,$res);
 	  
 	  /** らこらこらこ～ｗ **/
-	  Action::Lacolacolaco($tmhOAuth,$res);
+	  Action::Lacolacolaco($tmhOAuth,$res,$your_screen_name);
   }
   
   /***
