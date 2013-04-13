@@ -31,7 +31,7 @@
 	  Action::Tweet_Watch($tmhOAuth,$res);
 	  
 	  /** らこらこらこ～ｗ **/
-	  Action::Lacolacolaco($tmhOAuth,$res,$your_screen_name);
+	  Action::Lacolacolaco($tmhOAuth,$res,@$your_screen_name);
   }
   
   /***

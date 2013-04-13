@@ -27,7 +27,7 @@ class Action{
 		}	
 	}
 	
-	public function UpdateStatus($tmhOAuth,$text,$InReplyTo)
+	public function UpdateStatus($tmhOAuth,$text,$InReplyTo = null)
 	{
 		return $tmhOAuth->request('POST', $tmhOAuth->url('1.1/statuses/update'), array(
 		'status' => $text
@@ -36,21 +36,29 @@ class Action{
 	
 	public function Lacolacolaco($tmhOAuth,$data,$your_screen_name)
 	{
-		$text = $data->{"text"};
-		$id = $data->{"id_str"};
+		@$text = $data->{"text"};
+		@$id = $data->{"id_str"};
 		//$source_user_id = $data->{"user"}->{"id_str"};
-		$source_screen_name = $data->{"user"}->{"screen_name"};
-		$target_text = 'らこらこらこ';
-		$post_text = 'らこらこらこ〜ｗ';
-		if( $source_screen_name !== $your_screen_name ){
-			if ((strpos($text, $target_text)) !== false) {
-				$res = self::UpdateStatus($tmhOAuth,$post_text);
-				self::Create_Favorite($tmhOAuth,$id);
-				while($res == 403){
-					// 投稿失敗時、ｗが4以下だったららこらこする
-					if( (substr_count($post_text, 'ｗ')) < 4){
-						$post_text .= 'ｗ';
-						$res = self::UpdateStatus($tmhOAuth,$post_text);
+		@$source_screen_name = $data->{"user"}->{"screen_name"};
+		$target_text = 'Test';
+		$wait_time = 300; //300秒待機
+		$post_text = 'test〜ｗ';
+		
+		if( (@$post_time === null) || (@$post_text > time())){
+			if( $source_screen_name !== $your_screen_name ){
+				if ((strpos($text, $target_text)) !== false) {
+					$res = self::UpdateStatus($tmhOAuth,$post_text);
+					if($res !== 403){
+						$post_time = time() + $wait_time;
+					}
+					self::Create_Favorite($tmhOAuth,$id);
+					while($res == 403){
+						// 投稿失敗時、ｗが4以下だったららこらこする
+						if( (substr_count($post_text, 'ｗ')) < 4){
+							$post_text .= 'ｗ';
+							$res = self::UpdateStatus($tmhOAuth,$post_text);
+							$post_time = time() + $wait_time;
+						}
 					}
 				}
 			}
