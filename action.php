@@ -40,9 +40,9 @@ class Action{
 		@$id = $data->{"id_str"};
 		//$source_user_id = $data->{"user"}->{"id_str"};
 		@$source_screen_name = $data->{"user"}->{"screen_name"};
-		$target_text = 'Test';
+		$target_text = 'らこらこらこ';
 		$wait_time = 300; //300秒待機
-		$post_text = 'test〜ｗ';
+		$post_text = 'らこらこらこ〜ｗ';
 		
 		if( (@$post_time === null) || (@$post_text > time())){
 			if( $source_screen_name !== $your_screen_name ){
