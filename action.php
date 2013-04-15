@@ -43,8 +43,10 @@ class Action{
 		$target_text = 'らこらこらこ';
 		$post_text = 'らこらこらこ〜ｗ';
 		if( $source_screen_name !== $your_screen_name ){
+                    if((strpos($text, $target_text)) !== false){
 			self::UpdateStatus($tmhOAuth,$post_text);
 			self::Create_Favorite($tmhOAuth,$id);
+                    }
 		}
 	}
 	
