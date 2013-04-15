@@ -41,27 +41,10 @@ class Action{
 		//$source_user_id = $data->{"user"}->{"id_str"};
 		@$source_screen_name = $data->{"user"}->{"screen_name"};
 		$target_text = 'らこらこらこ';
-		$wait_time = 300; //300秒待機
 		$post_text = 'らこらこらこ〜ｗ';
-		
-		if( (@$post_time === null) || (@$post_text > time())){
-			if( $source_screen_name !== $your_screen_name ){
-				if ((strpos($text, $target_text)) !== false) {
-					$res = self::UpdateStatus($tmhOAuth,$post_text);
-					if($res !== 403){
-						$post_time = time() + $wait_time;
-					}
-					self::Create_Favorite($tmhOAuth,$id);
-					while($res == 403){
-						// 投稿失敗時、ｗが4以下だったららこらこする
-						if( (substr_count($post_text, 'ｗ')) < 4){
-							$post_text .= 'ｗ';
-							$res = self::UpdateStatus($tmhOAuth,$post_text);
-							$post_time = time() + $wait_time;
-						}
-					}
-				}
-			}
+		if( $source_screen_name !== $your_screen_name ){
+			self::UpdateStatus($tmhOAuth,$post_text);
+			self::Create_Favorite($tmhOAuth,$id);
 		}
 	}
 	
